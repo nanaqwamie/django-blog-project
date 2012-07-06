@@ -8,14 +8,14 @@ class Post(models.Model):
     created=models.DateField(auto_now=True)
     updated=models.DateField(auto_now=True)
     def __unicode__(self):
-        return self.title,self.body,self.created
+        return self.title+" "+self.body
 class Comment(models.Model):
     body=models.TextField()
     author=models.CharField(max_length=60)
     created=models.DateField(auto_now=True)
     post=models.ForeignKey(Post)
     def __unicode__(self):
-        return self.post,self.author
+        return self.author
 admin.site.register(Post)
 admin.site.register(Comment)
 
