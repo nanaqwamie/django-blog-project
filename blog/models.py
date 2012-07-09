@@ -13,9 +13,30 @@ class Comment(models.Model):
     body=models.TextField()
     author=models.CharField(max_length=60)
     created=models.DateField(auto_now=True)
+    updated=models.DateField(auto_now=True)
     post=models.ForeignKey(Post)
     def __unicode__(self):
         return self.author
-admin.site.register(Post)
-admin.site.register(Comment)
+
+class PostAdmin(admin.ModelAdmin):
+    list_display=('title','created','updated')
+    search_fields=('title','body')
+    list_filter=('created',)
+    inline=['CommentInline']
+
+class CommentAdmin(admin.ModelAdmin):
+    def first_sixty_xters(self):
+        return self.body[:60]
+    list_display=('post','author','first_sixty_xters','created','updated')
+    list_filter=('created',)
+
+
+class CommentInline(admin.TabularInline):
+    pass
+
+admin.site.register(Post,PostAdmin)
+admin.site.register(Comment,CommentAdmin)
+
+
+
 
