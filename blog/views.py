@@ -25,12 +25,12 @@ def post_detail(request, id, showComments=False):
 
 
 def post_search(request, term):
-    result=Post.objects.filter(body_container=term)
+    result=Post.objects.filter(body__contains=term)
     temp=''
     for x in result:
-        temp='<u1><li><em>'+str(i)+'</em><li><u1>'
+        temp='<u1><li><em>'+str(x)+'</em><li><u1>'
     
-    return HttpResponse(res)
+    return HttpResponse(temp)
 def home(request):
     print 'it works'
     return HttpResponse('hello world. Ete zene?') 
