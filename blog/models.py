@@ -14,7 +14,7 @@ class Comment(models.Model):
     author=models.CharField(max_length=60)
     created=models.DateField(auto_now=True)
     updated=models.DateField(auto_now=True)
-    post=models.ForeignKey(Post)
+    post=models.ForeignKey(Post, related_name='comments')
     def __unicode__(self):
         return self.author
 
